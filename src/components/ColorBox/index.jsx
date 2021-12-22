@@ -1,21 +1,35 @@
-import React, { PureComponent } from "react";
-import PropTypes from  'prop-types';
+import React, { useState } from "react";
 import './ColorBox.scss';
-
-class ColorBox extends PureComponent {
-  render() {
-    const {color} = this.props;
-    return(
-      <div
-        style={{backgroundColor: color}}
-        className="color-box"
-      ></div>
-    );
+const getRandomColor = () => {
+  const ColorList = ['deeppink', 'yellow', 'black', 'blue', 'red'];
+  const randomIndex = Math.trunc(Math.random() * 5);
+  return ColorList[randomIndex];
+}
+const ColorBox = () => {
+  
+  const [color, setColor] = useState(() => {
+    const initColor = localStorage.getItem('box_color') || 'red';
+    return initColor;
+  });
+  function handleColor() {
+    //get random color -> color
+    const newColor = getRandomColor();
+    setColor(newColor);
+    localStorage.setItem('box_color', newColor);
   }
+  return (
+    <div className="color-box"
+      style={{ backgroundColor: color }}
+      onClick={handleColor}
+    >
+      Change Colorbox 
+    </div>
+  )
 }
 
-ColorBox.propTypes ={
-  color: PropTypes.string.isRequired,
+
+ColorBox.propTypes = {
+
 };
 
 export default ColorBox;

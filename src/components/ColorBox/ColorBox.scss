@@ -4,4 +4,7 @@ $box-width: 200px;
   width: $box-width;
   height: $box-width;
   border: 1px solid white;
+  color: #fff;
+  transition: all 0.35s ease-in-out 0s;
+  cursor: pointer;
 }
